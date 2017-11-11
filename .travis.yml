@@ -1,0 +1,18 @@
+os: osx
+language: crystal
+addons:
+  chrome: stable
+jdk:
+  - oraclejdk8
+crystal:
+  - latest
+install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
+  - brew install chromedriver
+  - brew install selenium-server-standalone
+before_script:
+  - brew services start selenium-server-standalone
+  - sleep 3
+  - shards install
+  - crystal spec
+env:
+  - AMBER_ENV=test
