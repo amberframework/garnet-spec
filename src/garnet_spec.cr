@@ -1,7 +1,7 @@
 require "spec"
-require "./amber_spec/system/**"
-require "./amber_spec/controller/*"
-require "./amber_spec/selenium_server"
+require "./garnet_spec/system/**"
+require "./garnet_spec/controller/*"
+require "./garnet_spec/selenium_server"
 
 # System Testing is a level of the software testing where a
 # complete and integrated software is tested. The purpose of this
