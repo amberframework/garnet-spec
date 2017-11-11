@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/amberframework/garnet-spec.svg?branch=master)](https://travis-ci.org/amberframework/garnet-spec)
 # System Test Framework
 
-A Crystal library to perform system and controller tests for Amber Web Applications.
+A Crystal library to perform system and controller tests for Web Applications.
 
 System Testing is a level of the software testing where a complete and integrated
 software is tested. The purpose of a system test is to evaluate the system’s compliance
@@ -89,4 +89,3 @@ crystal spec
 
 - [drujensen](https://github.com/drujensen) Dru Jensen - maintainer
 - [eliasjpr](https://github.com/eliasjpr) Elias J. Perez - maintainer
-
