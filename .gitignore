@@ -1,0 +1,5 @@
+.shards/
+tmp/
+lib/
+.DS_Store
+shard.lock
