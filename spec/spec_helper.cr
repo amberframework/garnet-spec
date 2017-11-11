@@ -1,5 +1,5 @@
 require "spec"
-require "../src/amber_spec"
+require "../src/garnet-spec"
 
 module Spec
   DRIVER = :chrome
