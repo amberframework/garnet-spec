@@ -6,10 +6,10 @@ class SomeFeature < Spec::System::Test
       visit "http://www.amberframework.org"
 
       timeout 1000
-      click_on(:css, "body > header > div > div > div > a")
+      click_on(:css, "a.nav-link")
       wait 2000
 
-      element(:tag_name, "body").text.should match /Introduction/
+      element(:tag_name, "body").text.should contain "Introduction"
     end
 
     scenario "user visits amberframwork homepage and sees logo" do
