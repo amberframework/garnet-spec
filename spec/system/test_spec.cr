@@ -4,10 +4,10 @@ class SomeFeature < Spec::System::Test
   describe "Amber Framework website" do
     scenario "user visits amber framework and sees getting started button" do
       visit "http://www.amberframework.org"
-
-      timeout 1000
-      click_on(:css, "a.nav-link")
       wait 2000
+      timeout 2000
+      click_on(:css, "a.nav-link")
+      wait 4000
 
       element(:tag_name, "body").text.should contain "Introduction"
     end
