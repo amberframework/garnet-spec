@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/amberframework/amber-spec.svg?branch=master)](https://travis-ci.org/amberframework/amber-spec)
+[![Build Status](https://travis-ci.org/amberframework/garnet-spec.svg?branch=master)](https://travis-ci.org/amberframework/garnet-spec)
 # System Test Framework
 
 A Crystal library to perform system and controller tests for Amber Web Applications.
@@ -17,8 +17,8 @@ Add this to your application's `shard.yml`:
 
 ```yaml
 dependencies:
-  amber_spec:
-    github: amberframework/amber-spec
+  garnet-spec:
+    github: amberframework/garnet-spec
 ```
 
 ## Usage
@@ -37,7 +37,7 @@ If you're running in a different OS such a Linux you can specify the chromedrive
 ```crystal
 # spec/spec_helper.cr
 require "amber"
-require "amber_spec"
+require "garnet-spec"
 
 module SystemTest
   DRIVER = :chrome
@@ -79,7 +79,7 @@ crystal spec
 
 ## Contributing
 
-1. Fork it ( https://github.com/amberframework/amber-spec/fork )
+1. Fork it ( https://github.com/amberframework/garnet-spec/fork )
 2. Create your feature branch (git checkout -b my-new-feature)
 3. Commit your changes (git commit -am 'Add some feature')
 4. Push to the branch (git push origin my-new-feature)
