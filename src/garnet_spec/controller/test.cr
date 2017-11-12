@@ -1,6 +1,6 @@
 require "http/server"
 
-module Spec::Controller
+module GarnetSpec::Controller
   abstract class Test
     macro inherited
         {% http_read_verbs = %w(get head) %}

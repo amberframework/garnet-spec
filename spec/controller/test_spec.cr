@@ -14,13 +14,13 @@ class FakeHandler
   end
 end
 
-class TestCase < Spec::Controller::Test
+class TestCase < GarnetSpec::Controller::Test
   def handler
     @handler ||= FakeHandler.new
   end
 end
 
-describe Spec::Controller::Test do
+describe GarnetSpec::Controller::Test do
   subject = TestCase.new
 
   describe "#get" do

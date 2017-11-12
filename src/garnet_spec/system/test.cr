@@ -1,13 +1,13 @@
-module Spec::System
+module GarnetSpec::System
   abstract class Test
     macro inherited
-      Spec.system_test = new
-      include Spec::System::DSL
+      GarnetSpec.system_test = new
+      include GarnetSpec::System::DSL
 
       forward_missing_to {{@type}}
 
       def self.before
-        @@selenium = Spec::SeleniumServer.boot
+        @@selenium = GarnetSpec::SeleniumServer.boot
         sleep 2
       end
 

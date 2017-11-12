@@ -1,6 +1,6 @@
 require "../spec_helper"
 
-class SomeFeature < Spec::System::Test
+class SomeFeature < GarnetSpec::System::Test
   describe "Amber Framework website" do
     scenario "user visits amber framework and sees getting started button" do
       visit "http://www.amberframework.org"

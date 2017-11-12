@@ -1,7 +1,7 @@
 require "spec"
 require "selenium"
 
-module Spec
+module GarnetSpec
   class SeleniumServer
     SELENIUM_COMMAND = "selenium-server"
 
