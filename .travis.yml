@@ -1,9 +1,7 @@
 os: osx
 language: crystal
 addons:
-  chrome: beta
-before_install:
-  - "/Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome --headless --disable-gpu --remote-debugging-port=9222 http://localhost &"
+  chrome: stable
 jdk:
   - oraclejdk8
 crystal:
@@ -12,7 +10,7 @@ install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
   - brew install chromedriver
   - brew install selenium-server-standalone
 before_script:
-  - selenium-server -port 4000 &
+  - brew services start selenium-server-standalone
   - sleep 3
   - shards install
   - crystal spec
