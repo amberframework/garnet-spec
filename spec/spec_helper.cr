@@ -1,7 +1,7 @@
 require "spec"
-require "../src/amber_spec"
+require "../src/garnet_spec"
 
-module Spec
+module GarnetSpec
   DRIVER = :chrome
   PATH   = "/usr/local/bin/chromedriver"
 
