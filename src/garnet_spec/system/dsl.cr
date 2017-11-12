@@ -1,9 +1,9 @@
-module Spec::System::DSL
+module GarnetSpec::System::DSL
   macro included
   # Page object that allows communicate with the browser.
   # A remote control interface that enables introspection and control of user agents
   def self.page
-    Spec::System::Page.instance
+    GarnetSpec::System::Page.instance
   end
 
   def self.click_on(key, value)

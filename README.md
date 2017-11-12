@@ -49,7 +49,7 @@ Writing SystemTests
 ```crystal
 require "spec_helper"
 
-class SomeFeatureSpec < Spec::SystemTestCase
+class SomeFeatureSpec < GarnetSpec::SystemTestCase
   describe "Some Feature test" do
     it "works" do
       visit "http://crystal-lang.org/api"

@@ -1,7 +1,7 @@
 require "selenium"
 require "./extensions/*"
 
-module Spec::System
+module GarnetSpec::System
   # Represents a page to be remote controlled
   class Page
     TIMEOUT = 5000
@@ -13,7 +13,7 @@ module Spec::System
     # Page object that allows communicate with the browser.
     # A remote control interface that enables introspection and control of user agents
     def self.instance
-      @@page ||= new **Spec.capabilities
+      @@page ||= new **GarnetSpec.capabilities
     end
 
     def initialize(**capabilities)

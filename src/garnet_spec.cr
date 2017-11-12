@@ -6,7 +6,7 @@ require "./garnet_spec/selenium_server"
 # System Testing is a level of the software testing where a
 # complete and integrated software is tested. The purpose of this
 # test is to evaluate the system's compliance with the specified requirements
-module Spec
+module GarnetSpec
   # Not all server implementations will support every WebDriver feature.
   # Therefore, the client and server should use JSON objects with the properties
   # listed below when describing which features a session supports.
@@ -30,11 +30,11 @@ module Spec
 
   class_property system_test : System::Test?
 
-  before_each do
+  Spec.before_each do
     self.system_test.try &.before
   end
 
-  after_each do
+  Spec.after_each do
     self.system_test.try &.after
   end
 
