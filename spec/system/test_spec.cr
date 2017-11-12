@@ -6,7 +6,7 @@ class SomeFeature < Spec::System::Test
       visit "http://www.amberframework.org"
       sleep 3
       timeout 2000
-      click_on(:css, "a.nav-link")
+      click_on(:css, "header a.btn.btn-primary")
       sleep 3
 
       element(:tag_name, "body").text.should contain "Introduction"
