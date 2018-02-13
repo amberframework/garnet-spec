@@ -7,7 +7,7 @@ module GarnetSpec
 
     # Boots Selenium Standalone Server
     def self.boot
-      Process.new(command: "selenium-server", output: true, error: true)
+      Process.new(command: "selenium-server", output: Process::Redirect::Inherit, error: Process::Redirect::Inherit)
     end
   end
 end
