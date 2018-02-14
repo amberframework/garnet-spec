@@ -5,10 +5,8 @@ class SomeFeature < GarnetSpec::System::Test
     scenario "user visits amber framework and sees getting started button" do
       visit "http://www.amberframework.org"
 
-      timeout 1000
-      click_on(:css, "header a.btn.btn-primary")
       wait 2000
-      element(:tag_name, "body").text.should contain "Introduction"
+      element(:tag_name, "body").text.should contain "Fork the project"
     end
 
     scenario "user visits amberframwork homepage and sees logo" do
@@ -16,7 +14,7 @@ class SomeFeature < GarnetSpec::System::Test
 
       wait 2000
       element(:class_name, "img-amber-logo").attribute("src").should match(
-        %r(https://www.amberframework.org/assets/img/amber-logo-t-bg.png)
+        %r(https://amberframework.org/assets/img/amber-logo-t-bg.png)
       )
     end
   end
