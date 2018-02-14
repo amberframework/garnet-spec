@@ -21,6 +21,10 @@ dependencies:
     github: amberframework/garnet-spec
 ```
 
+### Installing java
+
+MacOS: `brew cask install java` then `java --version` to verify installation.
+
 ## Usage
 
 Before running your tests ensure you have installed the chromedriver in your system path
