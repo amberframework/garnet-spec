@@ -3,7 +3,7 @@ require "http/server"
 module GarnetSpec::Controller
   abstract class Test
     macro inherited
-        {% http_read_verbs = %w(get head) %}
+        {% http_read_verbs = %w(get head options trace connect) %}
         {% http_write_verbs = %w(post put patch delete) %}
         {% http_verbs = http_read_verbs + http_write_verbs %}
 
