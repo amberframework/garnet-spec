@@ -11,7 +11,7 @@ module GarnetSpec::Controller
           def {{method.id}}(path, headers : HTTP::Headers? = nil, body : String? = nil)
             request = HTTP::Request.new("{{method.id}}".upcase, path, headers, body )
             {% if http_write_verbs.includes? method %}
-              request.headers["Content-Type"] = "application/x-www-form-urlencoded"
+              request.headers["Content-Type"] ||= "application/x-www-form-urlencoded"
             {% end %}
             process_request(request)
           end
