@@ -6,7 +6,8 @@ class FakeHandler
   end
 
   def call(context)
-    # Does nothing
+    response = { headers: context.request.headers.to_h }.to_json
+    context.response.write(response.to_slice)
   end
 
   private def prepare_pipelines
@@ -38,6 +39,21 @@ describe GarnetSpec::Controller::Test do
   describe "#post" do
     it "should return a HTTP::Client::Response" do
       subject.post("/posts").should be_a HTTP::Client::Response
+    end
+
+    it "should add Content-Type to headers" do
+      response = JSON.parse(subject.post("/posts").body)
+      headers = response["headers"]?
+      headers.should_not be_nil
+      headers.not_nil!.["Content-Type"].should eq ["application/x-www-form-urlencoded"]
+    end
+
+    it "should not force override of Content-Type" do
+      raw_response = subject.post("/posts", headers: HTTP::Headers{"Content-Type" => "application/json"})
+      response = JSON.parse(raw_response.body)
+      headers = response["headers"]?
+      headers.should_not be_nil
+      headers.not_nil!.["Content-Type"].should eq ["application/json"]
     end
   end
 
