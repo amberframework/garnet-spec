@@ -21,6 +21,10 @@ dependencies:
     github: amberframework/garnet-spec
 ```
 
+### Installing java
+
+MacOS: `brew cask install java` then `java --version` to verify installation.
+
 ## Usage
 
 Before running your tests ensure you have installed the chromedriver in your system path
@@ -49,7 +53,7 @@ Writing SystemTests
 ```crystal
 require "spec_helper"
 
-class SomeFeatureSpec < GarnetSpec::SystemTestCase
+class SomeFeatureSpec < GarnetSpec::System::Test
   describe "Some Feature test" do
     it "works" do
       visit "http://crystal-lang.org/api"
