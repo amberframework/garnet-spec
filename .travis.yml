@@ -11,7 +11,7 @@ install: # Install ChromeDriver (64bits; replace 64 with 32 for 32bits).
   - brew cask install chromedriver
   - brew install selenium-server-standalone
 before_script:
-  - selenium-server -port 4000 &
+  - brew services start --all
   - sleep 3
   - shards install
   - crystal spec
