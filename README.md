@@ -57,7 +57,7 @@ require "spec_helper"
 
 class SomeFeatureSpec < GarnetSpec::System::Test
   describe "Some Feature test" do
-    it "works" do
+    scenario "user visits crystal hompage" do
       visit "http://crystal-lang.org/api"
       fill "", "Client", "search"
 
