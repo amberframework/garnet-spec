@@ -28,13 +28,19 @@ module GarnetSpec
 
     def initialize 
       @chromedriver = start_chromedriver
-      sleep 1.seconds
+      sleep 0.5.seconds
       @selenium_server = start_server
       @session = start_session
     end
 
     def clear
       @session.try &.cookies.clear
+    end
+
+    def stop
+      session.try &.stop
+      stop_server
+      stop_chromedriver
     end
 
     private def start_session
@@ -49,12 +55,22 @@ module GarnetSpec
       )
     end
 
+    private def stop_server
+      if Process.exists? selenium_server.pid
+        selenium_server.try &.kill
+      end
+    end
+
+    private def stop_chromedriver
+      if Process.exists? chromedriver.pid
+        chromedriver.try &.kill
+      end
+    end
+
     private def start_chromedriver
       Process.new(
         "chromedriver",
         ["--port=4444", "--url-base=/wd/hub"],
-        output: Process::Redirect::Inherit,
-        error: Process::Redirect::Inherit,
         shell: false
       )
     end

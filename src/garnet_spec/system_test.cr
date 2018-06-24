@@ -11,8 +11,11 @@ module GarnetSpec
     end
 
     at_exit do
-      @@server.session.try &.stop
-      @@server.selenium_server.try &.kill
+      @@server.stop
+    end
+
+    def self.page
+      @@session
     end
 
     def self.session
@@ -23,7 +26,7 @@ module GarnetSpec
       session.timeouts("page load", duration)
     end
 
-    def self.click_on(key, value)
+    def self.click(key, value)
       session.find_element(key, value).click
     end
 
