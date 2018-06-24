@@ -1,19 +1,22 @@
+require "spec"
+require "./server"
+
 module GarnetSpec
   class SystemTest
     TIMEOUT = 100.milliseconds
-    @@server : Server = Server.new
-    forward_missing_to @@server
+    @@server : Server = Server::INSTANCE
 
     Spec.before_each do
       @@server.clear
     end
 
-    def self.session
-      @@server.session
+    at_exit do
+      @@server.session.try &.stop
+      @@server.selenium_server.try &.kill
     end
 
-    def self.server
-      @@server.server
+    def self.session
+      @@server.session
     end
 
     def self.timeout(duration : Int32 = TIMEOUT)

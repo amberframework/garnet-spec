@@ -2,9 +2,11 @@ require "selenium"
 
 module GarnetSpec
   class Server
+    INSTANCE = new
+
     getter session : Selenium::Session
-    getter server : Process?
-    getter chromedriver : Process?
+    getter selenium_server : Process
+    getter chromedriver : Process
 
     CAPABILITIES = {
       browserName:              "chrome",
@@ -24,34 +26,31 @@ module GarnetSpec
       nativeEvents:             true,
     }
 
-    def initialize
-      start_chromedriver
-      start_server
-      driver = Selenium::Webdriver.new
-      @session = Selenium::Session.new(driver, desired_capabilities = CAPABILITIES)
+    def initialize 
+      @chromedriver = start_chromedriver
+      sleep 1.seconds
+      @selenium_server = start_server
+      @session = start_session
     end
 
     def clear
       @session.try &.cookies.clear
     end
 
-    def stop
-      session.try &.stop
-      server.try &.kill
-      chromedriver.try &.kill
+    private def start_session
+      driver = Selenium::Webdriver.new
+      Selenium::Session.new(driver, desired_capabilities = CAPABILITIES)
     end
 
     private def start_server
-      @server = Process.new(
+      Process.new(
         command: "selenium-server",
-        output: Process::Redirect::Inherit,
-        error: Process::Redirect::Inherit,
         shell: false
       )
     end
 
     private def start_chromedriver
-      @chromedriver ||= Process.new(
+      Process.new(
         "chromedriver",
         ["--port=4444", "--url-base=/wd/hub"],
         output: Process::Redirect::Inherit,
