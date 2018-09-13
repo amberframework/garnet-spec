@@ -1,29 +1,13 @@
 require "spec"
 require "../src/garnet_spec"
 
-module GarnetSpec
-  DRIVER = :chrome
-  PATH   = "/usr/local/bin/chromedriver"
+class FakeHandler
+  def call(context)
+    response = { headers: context.request.headers.to_h }.to_json
+    context.response.write(response.to_slice)
+  end
+end
 
-  # Not all server implementations will support every WebDriver feature.
-  # Therefore, the client and server should use JSON objects with the properties
-  # listed below when describing which features a session supports.
-  capabilities = {
-    browserName:              "chrome",
-    version:                  "",
-    platform:                 "ANY",
-    javascriptEnabled:        true,
-    takesScreenshot:          true,
-    handlesAlerts:            true,
-    databaseEnabled:          true,
-    locationContextEnabled:   true,
-    applicationCacheEnabled:  true,
-    browserConnectionEnabled: true,
-    cssSelectorsEnabled:      true,
-    webStorageEnabled:        true,
-    rotatable:                true,
-    acceptSslCerts:           true,
-    nativeEvents:             true,
-    args:                     "--headless",
-  }
+module GarnetSpec
+  HANDLER = FakeHandler.new
 end
