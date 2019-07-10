@@ -1,5 +1,5 @@
 name: garnet_spec
-version: 0.1.1
+version: 0.2.1
 
 authors:
   - drujensen <drujensen@gmail.com>
@@ -12,4 +12,4 @@ license: MIT
 dependencies:
   selenium:
     github: ysbaddaden/selenium-webdriver-crystal
-    version: ~> 0.3.0
+    version: ~> 0.4.0
