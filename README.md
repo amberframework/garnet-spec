@@ -73,124 +73,32 @@ end
 
 ### Write Your Tests
 ```crystal
-require "spec_helper"
+require "./spec_helper"
 
-class SomeFeatureSpec < GarnetSpec::System::Test
-  describe "Some Feature test" do
-    scenario "user visits crystal hompage" do
-      visit "http://crystal-lang.org/api"
-      fill "", "Client", "search"
+class SomeFeature < GarnetSpec::SystemTest
+  describe "Amber Framework website" do
+    scenario "user visits amber framework and sees getting started button" do
+      visit "http://www.amberframework.org"
 
-      types_list = page.find_element(:id, "types-list")
-      types = types_list.find_elements(:css, "li:not([class~='hide'])")
+      element(:tag_name, "body").text.should contain "Fork the project"
+    end
 
-      types.size.should eq 512
+    scenario "user visits amberframwork homepage and sees logo" do
+      visit "http://www.amberframework.org"
+
+      element(:class_name, "img-amber-logo").attribute("src").should match(
+        %r(https://amberframework.org/assets/img/amber-logo-t-bg.png)
+      )
     end
   end
 end
 ```
 
 Run your `crystal spec`
+
 ```bash
 crystal spec
 ```
-
-## Example Amber Framework Controller Tests
-
-
-```crystal
-class PostControllerTest < GarnetSpec::Controller::Test
-  getter handler : Amber::Pipe::Pipeline
-
-  def initialize
-    @handler = Amber::Pipe::Pipeline.new
-    @handler.build :web do
-      plug Amber::Pipe::Error.new
-      plug Amber::Pipe::Session.new
-      plug Amber::Pipe::Flash.new
-    end
-    @handler.prepare_pipelines
-  end
-end
-```
-
-```crystal
-describe PostControllerTest do
-  subject = PostControllerTest.new
-
-  it "renders post index template" do
-    Post.clear
-    response = subject.get "/posts"
-
-    response.status_code.should eq(200)
-    response.body.should contain("Posts")
-  end
-
-  it "renders post show template" do
-    Post.clear
-    model = create_post
-    location = "/posts/#{model.id}"
-
-    response = subject.get location
-
-    response.status_code.should eq(200)
-    response.body.should contain("Show Post")
-  end
-
-  it "renders post new template" do
-    Post.clear
-    location = "/posts/new"
-
-    response = subject.get location
-
-    response.status_code.should eq(200)
-    response.body.should contain("New Post")
-  end
-
-  it "renders post edit template" do
-    Post.clear
-    model = create_post
-    location = "/posts/#{model.id}/edit"
-
-    response = subject.get location
-
-    response.status_code.should eq(200)
-    response.body.should contain("Edit Post")
-  end
-
-  it "creates a post" do
-    Post.clear
-    response = subject.post "/posts", body: post_params
-
-    response.headers["Location"].should eq "/posts"
-    response.status_code.should eq(302)
-    response.body.should eq "302"
-  end
-
-  it "updates a post" do
-    Post.clear
-    model = create_post
-    response = subject.patch "/posts/#{model.id}", body: post_params
-
-    response.headers["Location"].should eq "/posts"
-    response.status_code.should eq(302)
-    response.body.should eq "302"
-  end
-
-  it "deletes a post" do
-    Post.clear
-    model = create_post
-    response = subject.delete "/posts/#{model.id}"
-
-    response.headers["Location"].should eq "/posts"
-    response.status_code.should eq(302)
-    response.body.should eq "302"
-  end
-end
-
-```
-
-
 
 ## Development
 
