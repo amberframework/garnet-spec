@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/amberframework/garnet-spec.svg?branch=master)](https://travis-ci.org/amberframework/garnet-spec)
-# System Test Framework
+# Test Framework for Web Apps
 
 A Crystal library to perform system and controller tests for Web Applications.
 
@@ -7,6 +7,8 @@ System Testing is a level of the software testing where a complete and integrate
 software is tested. The purpose of a system test is to evaluate the system’s compliance
 with the specified requirements.
 
+
+## System Tests aka (Browser Tests, Feature Tests)
 **When is it performed?**
 
 System Testing is performed after Integration Testing and before Acceptance Testing.
@@ -38,37 +40,62 @@ This will install the chrome driver on the system path `/usr/local/bin/chromedri
 
 If you're running in a different OS such a Linux you can specify the chromedriver path as such
 
+### With Amber Framework
+
 ```crystal
 # spec/spec_helper.cr
+
 require "amber"
 require "garnet_spec"
 
-module SystemTest
-  DRIVER = :chrome
-  PATH = "/usr/local/bin/chromedriver"
+handler = Amber::Server.instance.handler
+handler.prepare_pipelines
+
+module GarnetSpec
+  HANDLER = handler
 end
 ```
 
-Writing SystemTests
+### Standalone
+
 ```crystal
-require "spec_helper"
+class FakeHandler
+  def call(context)
+    response = { headers: context.request.headers.to_h }.to_json
+    context.response.write(response.to_slice)
+  end
+end
 
-class SomeFeatureSpec < GarnetSpec::System::Test
-  describe "Some Feature test" do
-    it "works" do
-      visit "http://crystal-lang.org/api"
-      fill "", "Client", "search"
+module GarnetSpec
+  HANDLER = FakeHandler.new
+end
+```
 
-      types_list = page.find_element(:id, "types-list")
-      types = types_list.find_elements(:css, "li:not([class~='hide'])")
+### Write Your Tests
+```crystal
+require "./spec_helper"
 
-      types.size.should eq 512
+class SomeFeature < GarnetSpec::SystemTest
+  describe "Amber Framework website" do
+    scenario "user visits amber framework and sees getting started button" do
+      visit "http://www.amberframework.org"
+
+      element(:tag_name, "body").text.should contain "Fork the project"
+    end
+
+    scenario "user visits amberframwork homepage and sees logo" do
+      visit "http://www.amberframework.org"
+
+      element(:class_name, "img-amber-logo").attribute("src").should match(
+        %r(https://amberframework.org/assets/img/amber-logo-t-bg.png)
+      )
     end
   end
 end
 ```
 
 Run your `crystal spec`
+
 ```bash
 crystal spec
 ```
