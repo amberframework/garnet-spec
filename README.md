@@ -40,18 +40,38 @@ This will install the chrome driver on the system path `/usr/local/bin/chromedri
 
 If you're running in a different OS such a Linux you can specify the chromedriver path as such
 
+### With Amber Framework
+
 ```crystal
 # spec/spec_helper.cr
+
 require "amber"
 require "garnet_spec"
 
-module SystemTest
-  DRIVER = :chrome
-  PATH = "/usr/local/bin/chromedriver"
+handler = Amber::Server.instance.handler
+handler.prepare_pipelines
+
+module GarnetSpec
+  HANDLER = handler
 end
 ```
 
-Writing SystemTests
+### Standalone
+
+```crystal
+class FakeHandler
+  def call(context)
+    response = { headers: context.request.headers.to_h }.to_json
+    context.response.write(response.to_slice)
+  end
+end
+
+module GarnetSpec
+  HANDLER = FakeHandler.new
+end
+```
+
+### Write Your Tests
 ```crystal
 require "spec_helper"
 
@@ -75,7 +95,7 @@ Run your `crystal spec`
 crystal spec
 ```
 
-## Controller Tests
+## Example Amber Framework Controller Tests
 
 
 ```crystal
