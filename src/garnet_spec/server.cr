@@ -31,10 +31,17 @@ module GarnetSpec
     end
 
     private def start_server
-      Process.new(
-        command: "selenium-server",
-        shell: false
-      )
+      if PATH.includes?("local")
+        Process.new(
+          command: "selenium-server",
+          shell: false
+        )
+      else
+        Process.new(
+          "selenium-standalone", ["start"],
+          shell: false
+        )
+      end
     end
 
     private def stop_server
