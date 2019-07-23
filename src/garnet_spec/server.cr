@@ -8,24 +8,6 @@ module GarnetSpec
     getter selenium_server : Process
     getter chromedriver : Process
 
-    CAPABILITIES = {
-      browserName:              "chrome",
-      version:                  "",
-      platform:                 "ANY",
-      javascriptEnabled:        true,
-      takesScreenshot:          true,
-      handlesAlerts:            true,
-      databaseEnabled:          true,
-      locationContextEnabled:   true,
-      applicationCacheEnabled:  true,
-      browserConnectionEnabled: true,
-      cssSelectorsEnabled:      true,
-      webStorageEnabled:        true,
-      rotatable:                true,
-      acceptSslCerts:           true,
-      nativeEvents:             true,
-    }
-
     def initialize 
       @chromedriver = start_chromedriver
       sleep 0.5.seconds
