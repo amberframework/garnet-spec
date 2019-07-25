@@ -46,6 +46,10 @@ module GarnetSpec
     def self.element(key, value)
       session.find_element(key, value)
     end
+    
+    def self.elements(key, value)
+      session.find_elements(key, value)
+    end
 
     def self.scenario(description = "assert", file = __FILE__, line = __LINE__, end_line = __END_LINE__, &block)
       return unless Spec.matches?(description, file, line, end_line)
