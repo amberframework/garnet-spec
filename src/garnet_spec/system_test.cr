@@ -6,11 +6,11 @@ module GarnetSpec
     TIMEOUT = 100.milliseconds
     @@server : Server = Server::INSTANCE
 
-    Spec.before_each do
+    Spec.before_suite do
       @@server.clear
     end
 
-    at_exit do
+    Spec.after_suite do
       @@server.stop
     end
 
