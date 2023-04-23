@@ -57,13 +57,13 @@ module GarnetSpec
 
     private def stop_server
       if Process.exists? selenium_server.pid
-        selenium_server.try &.kill
+        selenium_server.try &.terminate
       end
     end
 
     private def stop_chromedriver
       if Process.exists? chromedriver.pid
-        chromedriver.try &.kill
+        chromedriver.try &.terminate
       end
     end
 
